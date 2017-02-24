@@ -1,0 +1,21 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+from django_tables2   import RequestConfig
+
+from .tables  import CustomerTable
+from .models import Owner, CustomerType, CustomerAttribute, Customer, CustomerAttrVal
+
+def index(request):
+    CustomerList = Customer.objects.all()
+    AttributeList = CustomerAttribute.objects
+    AttributeValueList = CustomerAttrVal.objects
+    template = loader.get_template('customer/index.html')
+    context = RequestContext(request, {
+        'CustomerList': CustomerList,
+        'AttributeList' : AttributeList,
+        'AttributeValueList' : AttributeValueList,
+    })
+    return HttpResponse(template.render(context))
+
+
