@@ -1569,17 +1569,17 @@ pre code {
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width: auto;
   }
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    width: auto;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: auto;
   }
 }
 .container-fluid {
@@ -4108,7 +4108,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-header {
-    float: right;
+    float: left;
   }
 }
 .navbar-collapse {
@@ -4284,6 +4284,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-image: none;
   }
 }
+
 @media (min-width: 768px) {
   .navbar-nav {
     float: left;

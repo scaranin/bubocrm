@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_tables2',
     'customer',
+	'menu',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,7 +73,7 @@ TEMPLATES = [
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    "D:/DEVEL/project/20160324/django/bubocrm/bubocrm/static/",
+    "d:/devel/project/20160415/bubocrm/bubocrm/static/",
 )
 
 WSGI_APPLICATION = 'bubocrm.wsgi.application'

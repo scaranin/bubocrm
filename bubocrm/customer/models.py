@@ -122,6 +122,11 @@ class Customer(models.Model):
     def __str__(self):
         return self.customer_name
 
+    def GetData(self):
+        '''Метод для получения массива данных по клиенту'''
+        return CustomerAttrVal.objects.filter(customer=self)
+
+
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('customershablon', 'customer_type', 'customer_name', 'ext_attr_value', 'status', 'create_date')
     list_filter = ('customershablon', 'customer_type',)

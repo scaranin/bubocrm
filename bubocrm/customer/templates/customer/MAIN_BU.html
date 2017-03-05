@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://bootstrap-3.ru/examples/grid/ -->
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CRM">
+    <meta name="author" content="BuboCorp">
+    <title>BUBO CRM</title>
+	<link rel="stylesheet" href="{% static "customer/css/screen.css" %}" />
+    <link href="{% static "customer/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "customer/css/grid.css" %}" rel="stylesheet">
+    <meta name="robots" content="NONE,NOARCHIVE">
+  </head>
+
+  <body class="dashboard" data-admin-utc-offset="{% now "Z" %}">
+    <div class="container">
+      <!-- Текущий пользователь -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">{% firstof user.get_short_name user.get_username %}</a>
+      </div>
+
+	  {% block customer %}
+      {% endblock %}
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "customer/js/jquery.js" %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script>
+       $('#myTab a').click(function (e) {
+       e.preventDefault()
+       $(this).tab('show')
+       })
+    </script>
+    <script src="{% static "customer/js/bootstrap.js" %}"></script>
+  
+</body></html>

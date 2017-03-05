@@ -1,0 +1,101 @@
+﻿{% extends 'customer/main.html' %}
+{% block customer %}
+<div class="row">
+        <div>
+        <!-- Добавление/поиск списка клиентов -->
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Клиенты</a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <form class="navbar-form" role="search" method="POST">
+                {% csrf_token %}
+                 <div class="row">
+                    <!-- Поиск клиентов -->
+                    <div class="form-group">
+                       <input class="form-control" type="text" maxlength="10" id="CusId" name="CusId" placeholder="Введите код клиента">
+                       <input class="form-control" type="text" maxlength="50" id="CusName" name="CusName" placeholder="Введите наименование клиента">
+                       <input class="form-control" type="text" maxlength="30" id="CusDopData" name="CusDopData" placeholder="Введите данные клиента">
+                       <button class="btn btn-info" id="btnCus" type="submit">Найти</button>
+                       <button class="btn btn-success" id="btnCus" type="button" data-toggle="modal" data-target="#myModal">Добавить</button>
+                    </div>
+
+                    <!-- Список клиентов -->
+                    {% if CustomerListCount %}
+                    <table class="table">
+                       <thead>
+                          <tr>
+                            <th>Код клиента</th>
+                            <th>Наименование</th>
+                            <th>Данные клиента</th>
+                            <th>Дата заведения</th>
+                          </tr>
+                       </thead>
+                          {% for Customer in CustomerList %}
+                          <tbody>
+                             <tr class="btn-cell">
+							    <td>
+								<a href="{% url 'data_customer' customer_id=Customer.customer_id %}">
+								{{Customer.customer_id}}
+								</a></td>
+                                <td>{{Customer.customer_name}}</td>
+                                <td>{{Customer.ext_attr_value}}</td>
+                                <td>{{Customer.create_date}}</td>
+								<td>{{Customer.customershablon}}</td>
+                             </tr>
+                          </tbody>
+                          {% endfor %}
+                    </table>
+                    {% endif %}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+				<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Отмена"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Добавление клиента</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+					  <ul id="myTab" class="nav nav-pills nav-justified">
+						 <li class="dropdown active">
+							<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Выберите шаблон клиента<b class="caret"></b></a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+							  {% for CustomerShablon in CustomerShablonList %}
+								 <li><a id="CustomerShablon_id {{CustomerShablon.CustomerShablon_id}}" href="#{{CustomerShablon.CustomerShablon_id}}" tabindex="-1" data-toggle="tab" >{{CustomerShablon.CustomerShablon_Name}}</a></li>
+							  {% endfor %}
+							</ul>
+						 </li>
+					  </ul>
+					   <div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="1"> 
+							<div class="panel-heading">1</div>
+						</div>
+						<div class="tab-pane fade in active" id="2"> 
+							<div class="panel-heading">2</div>
+						</div>
+					   </div>
+					 </div>
+				</div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-warning" data-dismiss="modal">Отмена</button>
+                   <button type="button" class="btn btn-success">Добавить</button>
+                </div>
+            </div>
+        </div>
+      </div>
+	  {% block customer_data %}
+      {% endblock %}
+{% endblock %}
